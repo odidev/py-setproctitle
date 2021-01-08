@@ -12,13 +12,18 @@ jobs:
       - name: Build sdist
         run: python setup.py sdist
 
+      - name: Build aarch64 packages
+        uses: RalfG/python-wheels-manylinux-build@v0.3.3-manylinux2014_aarch64
+        with:
+          python-versions: "cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39"
+
       - name: Build x86_64 packages
-        uses: RalfG/python-wheels-manylinux-build@v0.3.2-manylinux2014_x86_64
+        uses: RalfG/python-wheels-manylinux-build@v0.3.3-manylinux2014_x86_64
         with:
           python-versions: "cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39"
 
       - name: Build i686 packages
-        uses: RalfG/python-wheels-manylinux-build@v0.3.2-manylinux2014_i686
+        uses: RalfG/python-wheels-manylinux-build@v0.3.3-manylinux2014_i686
         with:
           python-versions: "cp36-cp36m cp37-cp37m cp38-cp38 cp39-cp39"
 
@@ -30,6 +35,7 @@ jobs:
             dist/*.tar.gz
             dist/*-manylinux1_i686.whl
             dist/*-manylinux1_x86_64.whl
+            dist/*-manylinux2014_aarch64.whl
 
   build-windows:
     name: Build Windows packages
